@@ -1,0 +1,45 @@
+-- Copyright (C) 2018  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files from any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Intel Program License 
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel FPGA IP License Agreement, or other applicable license
+-- agreement, including, without limitation, that your use is for
+-- the sole purpose of programming logic devices manufactured by
+-- Intel and sold by Intel or its authorized distributors.  Please
+-- refer to the applicable agreement for further details.
+
+-- Quartus Prime generated Memory Initialization File (.mif)
+
+WIDTH=32;
+DEPTH=128;
+
+ADDRESS_RADIX=UNS;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+	0   :   00000000;
+	1   :   00000000;
+	2	:	20020005;        -- main:   addi $2, $0, 5       # $2 = 5;	-- (0)
+	3	:	2003000c;        --         addi $3, $0, 12      # $3 = 12;	-- (4)
+	4	:	2067fff7;        --         addi $7, $3, -9      # $7 = $3 - 9;  -- 3 (8)
+	5	:	00e22025;        --         or   $4, $7, $2      # $4 = $7 | $2; -- 7 (C)
+	6	:	00642824;        --         and  $5, $3, $4      # $5 = $3 & $4; -- 4 (10)
+	7	:	00a42820;        --         add  $5, $5, $4      # $5 = $5 + $4; -- 11 (14)
+	8	:	10a7000a;        --         beq  $5, $7, end     # if ($5 == $7) goto end;   -- false (18)
+	9	:	0064202a;        --         slt  $4, $3, $4      # $4 = $3 < $4  -- 0 (1C)
+	10	:	10800001;        --         beq  $4, $0, around  # if ($4 == 0) goto around; -- true (20)
+	11	:	20050000;        --         addi $5, $0, 0       # should not happen -- (24)
+	12	:	00e2202a;        -- around: slt  $4, $7, $2      # $4 = $7 < $2; -- 1 (28)
+	13	:	00853820;        --         add  $7, $4, $5      # $7 = $4 + $5; -- 12 (2C)
+	14	:	00e23822;        --         sub  $7, $7, $2      # $7 = $7 - $2; -- 7 (30)
+	15	:	ac670044;        --         sw   $7, 68($3)      # [80] = 7; 	-- (3C)
+	16	:	8c020050;        --         lw   $2, 80($0)      # $2 = [80];    -- 7 (40)
+	17	:	08000011;        --         j    end             # goto end;	-- (44)
+	18	:	20020001;        --         addi $2, $0, 1       # should not happen -- (48)
+	19	:	ac020054;        --         sw   $2, 84($0)	# 	     	    // (4C)
+	[20..127]  :   00000000;
+END;
